@@ -1,92 +1,34 @@
-import { useEffect, useState } from "react";
+// // import { useEffect, useState } from "react";
+
+import { useState } from "react";
+import Input from "./Components/Input";
+import Board from "./Components/Board";
+
+
 
 function App() {
-  const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(false);
-  const [laps, setLaps] = useState([]); 
-
-  useEffect(() => {
-    let interval;
-    if (running) {
-      interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
-      }, 10);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [running]);
-
-  const handleLap = () => {
-    setLaps((prevLaps) => [...prevLaps, time]); 
-  };
+  const [taskList, setTaskList] = useState([]);
 
   return (
-    <div className="flex justify-center items-center flex-col mt-[20px]">
-      <h1 className="text-3xl font-medium">01 - Stopwatch</h1>
-      <div className="mt-4 font-normal text-lg">
-        <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-        <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
-        <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
-      </div>
-      <div className="space-x-5 mt-4 ">
-        {running ? (
-          <button
-            className="text-white bg-blue-400 px-2 py-1 rounded-md"
-            onClick={() => {
-              setRunning(false);
-            }}
-          >
-            Stop
-          </button>
-        ) : (
-          <button
-            className="text-white bg-blue-400 px-2 py-1 rounded-md"
-            onClick={() => {
-              setRunning(true);
-            }}
-          >
-            Start
-          </button>
-        )}
-
-        <button
-          className="text-white bg-blue-400 px-2 py-1 rounded-md"
-          onClick={() => {
-            setTime(0);
-            setLaps([]); 
-          }}
-        >
-          Reset
-        </button>
-
-        <button
-          className="text-white bg-blue-400 px-2 py-1 rounded-md"
-          onClick={handleLap} 
-        >
-          Lap
-        </button>
-      </div>
-
-
-
-      
-
-      <div className="mt-4">
-        <h2 className="text-xl font-medium">Laps</h2>
-        <ul>
-          {laps.map((lap, index) => (
-            <div key={index} className="text-lg">
-             Laps are showing here{index + 1}:{" "}
-              {("0" + Math.floor((lap / 60000) % 60)).slice(-2)}:
-              {("0" + Math.floor((lap / 1000) % 60)).slice(-2)}:
-              {("0" + ((lap / 10) % 100)).slice(-2)}
-            </div>
+    <div className="px-12">
+      <div className="flex flex-col items-center justify-center py-4 gap-4">
+        <h1 className="text-bold text-2xl">To-do List</h1>
+        <Input taskList={taskList} setTaskList={setTaskList} />
+        <div className=" w-[100%] grid grid-cols-3 px-4 sm:px  ms:px-10 lg:10-12 gap-14">
+          {taskList.map((tasks, index) => (
+            <Board
+              key={index}
+              tasks={tasks}
+              TaskList={taskList}
+              setTaskList={setTaskList}
+            />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
+
+
