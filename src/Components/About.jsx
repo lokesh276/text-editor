@@ -24,34 +24,30 @@ function About() {
         "Landwind’s components are open-source and provide support for modern browsers. Learn more about browser compatibility.",
     },
   ];
-    
 
-    const [buttonText,setButtonText] = useState("Enable Light Mode")
-    const [myStyle, setMyStyle] = useState({
-      color: "white",
+  const [buttonText, setButtonText] = useState("Enable Light Mode");
+  const [myStyle, setMyStyle] = useState({
+    color: "white",
+    backgroundColor: "black",
+    border: "2px solid white",
+  });
+
+  const chnageStyle = () => {
+    if (myStyle.color === "white") {
+      setMyStyle({
+        color: "black",
+        backgroundColor: "white",
+      });
+      setButtonText("Enable Dark Mode");
+    } else {
+      setMyStyle({
+        color: "white",
         backgroundColor: "black",
-      border:"2px solid white"
-    });
-
-
-    const chnageStyle = () => {
-        if (myStyle.color === 'white') {
-            setMyStyle({
-                color: "black",
-                backgroundColor: "white",
- 
-            })
-            setButtonText("Enable Dark Mode")
-        } else {
-            setMyStyle({
-              color: "white",
-              backgroundColor: "black",
-              border: "2px solid white",
-            });
-            setButtonText("Enable Light Mode");
-       }
+        border: "2px solid white",
+      });
+      setButtonText("Enable Light Mode");
     }
-    
+  };
 
   return (
     <div className="text-center mx-auto p-10 bg-white " style={myStyle}>
@@ -72,8 +68,7 @@ function About() {
         ))}
         <div className="container">
           <Button onClick={chnageStyle} text={buttonText} />
-              </div>
-              
+        </div>
       </div>
     </div>
   );

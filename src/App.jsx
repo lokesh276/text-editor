@@ -4,7 +4,11 @@ import TexthtmlForm from "./Components/TextForm";
 import About from "./Components/About";
 import { useState } from "react";
 import Alert from "./Alert";
-import FecthApi from "./Components/FecthApi";
+import FetchApi from "./Components/FetchApi";
+import UseState from "./Components/myHooks/UseState";
+import Useeffect from "./Components/myHooks/Useeffect";
+import UseCallBack from "./Components/myHooks/UseCallBack";
+import ReactForm from "./Components/myHooks/ReactForm";
 
 function App() {
   const [mode, setMode] = useState("white");
@@ -22,10 +26,16 @@ function App() {
       setMode("black");
       document.body.style.backgroundColor = "black";
       handleAlert("Dark mode is enable ");
+      setTimeout(() => {
+        document.title = "TextUtils-Dark";
+      }, 2000);
     } else {
       setMode("white");
       document.body.style.backgroundColor = "white";
       handleAlert("Light mode is enable");
+      setTimeout(() => {
+        document.title = "TextUtils-Light";
+      }, 2000);
     }
   };
 
@@ -47,7 +57,11 @@ function App() {
         ></Route>
         <Route path="/about" element={<About />}></Route>
       </Routes>
-      <FecthApi/>
+      <FetchApi />
+      <UseState />
+      <Useeffect />
+      <UseCallBack />
+      <ReactForm/>
     </div>
   );
 }
